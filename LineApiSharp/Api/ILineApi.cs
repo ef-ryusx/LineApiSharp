@@ -7,14 +7,14 @@ namespace LineApiSharp.Api
     public interface ILineApi
     {
         string Url { get; }
-        Encoding Encoding { get; }
+        Encoding Enc { get; }
         Task<string> Request();
     }
 
     public abstract class LineApiBase : ILineApi
     {
         public abstract string Url { get; }
-        public virtual Encoding Encoding => Encoding.UTF8;
+        public virtual Encoding Enc => Encoding.UTF8;
         static HttpClient client = new HttpClient();
         
         protected abstract HttpRequestMessage CreateHttpRequestMessage();

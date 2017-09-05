@@ -32,7 +32,7 @@ namespace LineApiSharp.Api
         protected override HttpRequestMessage CreateHttpRequestMessage() 
             => new HttpRequestMessage(HttpMethod.Post, Url) { Content = CreateRequestContent() };
 
-        FormUrlEncodedContent CreateRequestContent()=> (client_id.IsNullOrEmpty() || client_secret.IsNullOrEmpty())
+        FormUrlEncodedContent CreateRequestContent() => (client_id.IsNullOrEmpty() || client_secret.IsNullOrEmpty())
             ? throw new Exception($"Unexpected parameter error:{GetType().FullName}")
             : new FormUrlEncodedContent(new Dictionary<string, string>
             {
