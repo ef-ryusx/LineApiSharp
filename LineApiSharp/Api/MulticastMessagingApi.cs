@@ -33,7 +33,7 @@ namespace LineApiSharp.Api
         {
             var request = new HttpRequestMessage(HttpMethod.Post, Url);
             request.Headers.Authorization = new AuthenticationHeaderValue($"Bearer {_channelAccessToken}");
-            request.Content = new StringContent(GetJsonContents(), Encoding, contentType);
+            request.Content = new StringContent(GetJsonContents(), Enc, contentType);
             return request;
         }
     }
