@@ -12,21 +12,28 @@ namespace LineApiSharp.Api
     {
         public override string Url => @"https://api.line.me/v2/bot/message/multicast";
         readonly string contentType = @"application/json";
-        readonly string channelAccessToken;
-        IEnumerable<string> to;
-        IEnumerable<ILineMessage> messages;
+        readonly string _channelAccessToken;
+        IEnumerable<string> _to;
+        IEnumerable<ILineMessage> _messages;
 
         internal MulticastMessagingApi(string channelAccessToken, IEnumerable<string> to, IEnumerable<ILineMessage> messages)
         {
-            this.channelAccessToken = channelAccessToken;
-            this.to = to;
-            this.messages = messages;
+            _channelAccessToken = channelAccessToken;
+            _to = to;
+            _messages = messages;
         }
-        
+
+        public string GetJsonContents() => Newtonsoft.Json.JsonConvert.SerializeObject(new
+        {
+            to = _to,
+            messages = _messages
+        });
+
         protected override HttpRequestMessage CreateHttpRequestMessage()
         {
             var request = new HttpRequestMessage(HttpMethod.Post, Url);
-            request.Headers.Authorization = new AuthenticationHeaderValue($"Bearer {channelAccessToken}");
+            request.Headers.Authorization = new AuthenticationHeaderValue($"Bearer {_channelAccessToken}");
+            request.Content = new StringContent(GetJsonContents(), Encoding, contentType);
             return request;
         }
     }

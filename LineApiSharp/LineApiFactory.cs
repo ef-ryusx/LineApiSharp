@@ -1,4 +1,6 @@
 ﻿using LineApiSharp.Api;
+using LineApiSharp.Messages;
+using System.Collections.Generic;
 
 namespace LineApiSharp
 {
@@ -18,5 +20,10 @@ namespace LineApiSharp
 
         public static ILineApi CreateUserProfileApi(string access_token) => new UserProfileApi(access_token);
         public static ILineApi CreateAddFriendApi(string access_token) => new AddFriendApi(access_token);
+
+        public static ILineApi CreateMulticastMessagingApi(string channelAccessToken, IEnumerable<string> to, IEnumerable<ILineMessage> messages)
+            => new MulticastMessagingApi(channelAccessToken, to, messages);
+
+        public static ILineMessage CreateTextMessage(string text) => new TextMessage(text);
     }
 }
