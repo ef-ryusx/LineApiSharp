@@ -13,8 +13,8 @@ namespace LineApiSharp.Api
         public override string Url => @"https://api.line.me/v2/bot/message/multicast";
         readonly string contentType = @"application/json";
         readonly string _channelAccessToken;
-        IEnumerable<string> _to;
-        IEnumerable<ILineMessage> _messages;
+        readonly IEnumerable<string> _to;
+        readonly IEnumerable<ILineMessage> _messages;
 
         internal MulticastMessagingApi(string channelAccessToken, IEnumerable<string> to, IEnumerable<ILineMessage> messages)
         {

@@ -4,7 +4,7 @@ namespace LineApiSharp.Messages
 {
     public class TextMessage : ILineMessage
     {
-        public TextMessage(string text)
+        internal TextMessage(string text)
         {
             Text = text;
         }
